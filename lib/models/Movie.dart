@@ -1,17 +1,21 @@
 class Movie {
   String name;
+  String plot;
   List genres;
-  String releaseDate;
   List cast;
-  List theatres;
-  String description;
+  List language;
+  String releaseDate;
+  String price;
+  List theatre;
 
   Movie({
     this.name,
+    this.plot,
     this.genres,
+    this.language,
     this.releaseDate,
     this.cast,
-    this.description,
-    this.theatres,
+    this.price,
+    this.theatre,
   });
 }

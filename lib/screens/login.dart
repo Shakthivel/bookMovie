@@ -20,7 +20,16 @@ class _LoginState extends State<Login> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  OverlayEntry _progressOverlay = OverlayEntry(
+      builder: (context) => Stack(
+            children: [
+              Container(color: Colors.white),
+              Center(
+                child: CircularProgressIndicator(),
+              )
+            ],
+          ),
+      opaque: true);
   @override
   Widget build(BuildContext context) {
     final ref = fb.reference();
@@ -91,13 +100,15 @@ class _LoginState extends State<Login> {
                         color: Colors.white,
                       ),
                       onTap: () async {
+                        Overlay.of(context).insert(_progressOverlay);
                         User user;
                         String role;
                         try {
                           user = (await FirebaseAuth.instance
                                   .signInWithEmailAndPassword(
-                                      email: _emailController.text,
-                                      password: _passwordController.text))
+                            email: "def@gmail.com",
+                            password: "asdfghjkl",
+                          ))
                               .user;
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'user-not-found') {
@@ -125,6 +136,7 @@ class _LoginState extends State<Login> {
                             Navigator.of(context).pushNamed('/user');
                           else
                             Navigator.of(context).pushNamed('/admin');
+                          _progressOverlay.remove();
                         }
                       },
                     ),

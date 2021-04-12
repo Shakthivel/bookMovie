@@ -38,7 +38,9 @@ Widget shadowButton({
     ),
   );
 }
-String dummyImageUrl = "https://i2-prod.belfastlive.co.uk/incoming/article12963211.ece/ALTERNATES/s1200c/Dominos-Pizza.jpg";
+
+String dummyImageUrl =
+    "https://i2-prod.belfastlive.co.uk/incoming/article12963211.ece/ALTERNATES/s1200c/Dominos-Pizza.jpg";
 
 InputDecoration inputFieldDec = InputDecoration(
   filled: true,
@@ -47,5 +49,13 @@ InputDecoration inputFieldDec = InputDecoration(
     borderRadius: BorderRadius.circular(10),
   ),
 );
-InputDecoration searchDec =
-    InputDecoration(border: InputBorder.none, hintText: "Search");
+InputDecoration searchDec = InputDecoration(
+  border: InputBorder.none,
+  hintText: "Search",
+  hintStyle: TextStyle(
+    color: Colors.white,
+  ),
+  labelStyle: TextStyle(
+    color: Colors.white,
+  ),
+);
