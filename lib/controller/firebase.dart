@@ -20,8 +20,9 @@ uploadMovie(Movie m, File pic) async {
     "genres": m.genres,
     "cast": m.cast,
     "language": m.language,
-    "releaseDate": m.price,
+    "releaseDate": m.releaseDate,
     "theatre": m.theatre,
+    "price": m.price,
   });
   TaskSnapshot snapshot = await storage
       .ref()

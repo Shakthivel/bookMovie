@@ -1,3 +1,6 @@
+import 'package:book_movie/screens/user/frag/HistoryFragment.dart';
+import 'package:book_movie/screens/user/frag/HomeFragment.dart';
+
 import 'package:flutter/material.dart';
 
 class UserHomeScreen extends StatefulWidget {
@@ -7,23 +10,16 @@ class UserHomeScreen extends StatefulWidget {
 
 class _UserHomeScreenState extends State<UserHomeScreen> {
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-    ),
-    Text(
-      'Index 1: Business',
-    ),
-    Text(
-      'Index 2: School',
-    ),
+
+  static List<Widget> _widgets = <Widget>[
+    HomeFragment(),
+    HistoryFragment(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _widgets[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -33,10 +29,6 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.money),
             label: 'Tickets',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,

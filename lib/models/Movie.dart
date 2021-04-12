@@ -18,4 +18,16 @@ class Movie {
     this.price,
     this.theatre,
   });
+
+  Movie.fromJson(var value) {
+    this.name = value["name"];
+    this.plot = value["plot"];
+    this.genres = value["genres"];
+    this.language = value["language"];
+    this.releaseDate = value["releaseDate"];
+
+    this.cast = value["cast"];
+    this.price = value["price"].toString();
+    this.theatre = value["theatre"];
+  }
 }

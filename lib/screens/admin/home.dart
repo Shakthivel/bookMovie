@@ -1,4 +1,7 @@
 import 'package:book_movie/constants/BOXSTYLES.dart';
+import 'package:book_movie/models/Movie.dart';
+import 'package:book_movie/widgets/moviesCard.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class AdminHomeScreen extends StatefulWidget {
@@ -11,6 +14,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
   @override
   void initState() {
     super.initState();
+    retrieveMoviesList();
   }
 
   @override
@@ -48,16 +52,30 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
           ListView.builder(
             itemCount: moviesList.length,
             shrinkWrap: true,
-            itemBuilder: (BuildContext ctxt, int index) {
+            itemBuilder: (BuildContext ctx, int index) {
+              Movie m = moviesList[index];
               return Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                child: Text(moviesList[index].toString()),
+                child: MoviesCard(movie: m),
               );
             },
           ),
         ],
       ),
     );
+  }
+
+  retrieveMoviesList() async {
+    moviesList.clear();
+    final fb = FirebaseDatabase.instance;
+    final ref = fb.reference();
+    final response = ref.child("movies").once();
+    await response.then((DataSnapshot data) {
+      for (var value in data.value.values) {
+        moviesList.add(new Movie.fromJson(value));
+      }
+    });
+    setState(() {});
   }
 }
