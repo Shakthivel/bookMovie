@@ -4,6 +4,8 @@ class Ticket {
   String time;
   List seats;
   String amt;
+  String date;
 
-  Ticket({this.amt, this.location, this.name, this.seats, this.time});
+  Ticket(
+      {this.amt, this.location, this.name, this.seats, this.time, this.date});
 }

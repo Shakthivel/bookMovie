@@ -1,4 +1,5 @@
 import 'package:book_movie/constants/TEXTSTYLES.dart';
+import 'package:book_movie/controller/firebase.dart';
 import 'package:book_movie/models/Movie.dart';
 import 'package:book_movie/models/Ticket.dart';
 import 'package:book_movie/screens/user/ticket.dart';
@@ -10,7 +11,8 @@ class SelectSeatScreen extends StatefulWidget {
   Movie movie;
   String theatreName;
   String time;
-  SelectSeatScreen({this.movie, this.theatreName, this.time});
+  String date;
+  SelectSeatScreen({this.movie, this.theatreName, this.time, this.date});
   @override
   _SelectSeatScreenState createState() => _SelectSeatScreenState();
 }
@@ -53,6 +55,22 @@ class _SelectSeatScreenState extends State<SelectSeatScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text("${widget.movie.name}", style: label_style),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("${widget.date}", style: label_style),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "${widget.time}",
+                    style: label_style,
+                  ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -115,8 +133,10 @@ class _SelectSeatScreenState extends State<SelectSeatScreen> {
               name: widget.movie.name,
               seats: selected,
               time: widget.time,
+              date: widget.date,
             );
-            Navigator.push(
+            uploadTicket(ticket);
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => TicketScreen(ticket: ticket),

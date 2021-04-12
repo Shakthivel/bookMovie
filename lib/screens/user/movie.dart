@@ -15,6 +15,9 @@ class MovieScreen extends StatefulWidget {
 
 class _MovieScreenState extends State<MovieScreen> {
   String movieUrl;
+  DateTime selectedDate = DateTime.now();
+  var pickedDate;
+  String displayDate;
 
   @override
   void initState() {
@@ -173,12 +176,43 @@ class _MovieScreenState extends State<MovieScreen> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "THEATRES:",
-                style: label_style,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "THEATRES:",
+                    style: label_style,
+                  ),
+                ),
+                InkWell(
+                  child:
+                      Text(displayDate == null ? 'Select a Date' : displayDate),
+                  onTap: () async {
+                    DateTime picked = await showDatePicker(
+                      context: context,
+                      initialDate: selectedDate, // Refer step 1
+                      firstDate: selectedDate,
+                      lastDate: selectedDate.add(Duration(days: 7)),
+                    );
+
+                    if (picked != null) {
+                      //print(picked);
+                      setState(() {
+                        pickedDate = picked
+                            .toString()
+                            .substring(0, 11)
+                            .split("-")
+                            .join('/');
+
+                        displayDate =
+                            pickedDate.toString().split('/').reversed.join('/');
+                      });
+                    }
+                  },
+                ),
+              ],
             ),
             ListView.builder(
               itemCount: widget.movie.theatre.length,
@@ -214,9 +248,31 @@ class _MovieScreenState extends State<MovieScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => SelectSeatScreen(
+                                        movie: widget.movie,
+                                        theatreName: theatreName,
+                                        time: "15.00",
+                                        date: displayDate),
+                                  ),
+                                );
+                              }),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                              child: Container(
+                                padding: EdgeInsets.all(5),
+                                color: Colors.white,
+                                child: Text("18.00"),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SelectSeatScreen(
                                       movie: widget.movie,
                                       theatreName: theatreName,
-                                      time: "15.00",
+                                      time: "18.00",
+                                      date: displayDate,
                                     ),
                                   ),
                                 );
@@ -224,19 +280,25 @@ class _MovieScreenState extends State<MovieScreen> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            padding: EdgeInsets.all(5),
-                            color: Colors.white,
-                            child: Text("18.00"),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            padding: EdgeInsets.all(5),
-                            color: Colors.white,
-                            child: Text("21.00"),
-                          ),
+                          child: InkWell(
+                              child: Container(
+                                padding: EdgeInsets.all(5),
+                                color: Colors.white,
+                                child: Text("21.00"),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SelectSeatScreen(
+                                      movie: widget.movie,
+                                      theatreName: theatreName,
+                                      time: "21.00",
+                                      date: displayDate,
+                                    ),
+                                  ),
+                                );
+                              }),
                         ),
                       ],
                     ),
