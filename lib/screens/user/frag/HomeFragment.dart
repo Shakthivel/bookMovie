@@ -1,6 +1,7 @@
 import 'package:book_movie/constants/BOXSTYLES.dart';
 import 'package:book_movie/constants/TEXTSTYLES.dart';
 import 'package:book_movie/models/Movie.dart';
+import 'package:book_movie/screens/user/movie.dart';
 import 'package:book_movie/widgets/viewMovieCards.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -124,7 +125,12 @@ class _HomeFragmentState extends State<HomeFragment> {
                 child: InkWell(
                     child: viewMovieCards(movie: m),
                     onTap: () {
-                      Navigator.of(context).pushNamed("/movie");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MovieScreen(movie: m),
+                        ),
+                      );
                     }),
               );
             },

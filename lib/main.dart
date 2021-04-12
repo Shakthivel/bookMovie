@@ -1,3 +1,4 @@
+import 'package:book_movie/screens/user/selectSeat.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           '/user': (context) => UserHomeScreen(),
           '/admin': (context) => AdminHomeScreen(),
           '/addMovie': (context) => AddMovieScreen(),
+          '/seatLayout': (context) => SelectSeatScreen(),
         });
   }
 }
