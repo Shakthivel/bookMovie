@@ -32,6 +32,10 @@ dependencies:
   flutter_svg: ^0.21.0+1
   carousel_slider: ^3.0.0
   qr_utils: ^0.1.5
+  firebase_core: ^0.7.0
+  firebase_auth: "^0.20.1"
+  firebase_database: "^6.0.0"
+  toast: ^0.1.5
   
 
 dev_dependencies:

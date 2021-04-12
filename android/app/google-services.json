@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "947305114979",
+    "project_id": "bookmovie-6caba",
+    "storage_bucket": "bookmovie-6caba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947305114979:android:e71eb3ddacc0a74dc3f756",
+        "android_client_info": {
+          "package_name": "com.shakthi2551.book_movie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947305114979-u9fuknjh5m9i7h2ikaa88ffmcg5213op.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlxgXbzj1-PC23DbJ8pxJUZ6B9yzbzD88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947305114979-u9fuknjh5m9i7h2ikaa88ffmcg5213op.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

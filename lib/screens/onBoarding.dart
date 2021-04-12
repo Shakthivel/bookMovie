@@ -42,11 +42,11 @@ class OnBoardingScreen extends StatelessWidget {
       showSkipButton: true,
       skip: const Text("Skip"),
       onSkip: () {
-        Navigator.of(context).pushReplacementNamed('/user');
+        Navigator.of(context).pushReplacementNamed('/login');
       },
       done: const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
       onDone: () {
-        Navigator.of(context).pushReplacementNamed('/user');
+        Navigator.of(context).pushReplacementNamed('/login');
       },
     ));
   }

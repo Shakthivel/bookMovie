@@ -1,10 +1,14 @@
+import 'package:book_movie/screens/admin/home.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import './screens/onBoarding.dart';
 import './screens/login.dart';
 import './screens/user/home.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -18,8 +22,9 @@ class MyApp extends StatelessWidget {
         ),
         home: OnBoardingScreen(),
         routes: {
-          '/login': (context) => LoginScreen(),
+          '/login': (context) => Login(),
           '/user': (context) => UserHomeScreen(),
+          '/admin': (context) => AdminHomeScreen(),
         });
   }
 }
