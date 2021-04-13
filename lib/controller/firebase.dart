@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 uploadMovie(Movie m, File pic) async {
   final fb = FirebaseDatabase.instance;
@@ -44,9 +45,11 @@ uploadMovie(Movie m, File pic) async {
 uploadTicket(Ticket t) async {
   final fb = FirebaseDatabase.instance;
   final ref = fb.reference();
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final SharedPreferences prefs = await _prefs;
   await ref
       .child("users")
-      .child("eTc4CUCeDPW8Fj6JSxGLpcb0a0G3")
+      .child(prefs.getString("uid"))
       .child("tickets")
       .child((t.name.toLowerCase().trim() +
               t.date.replaceAll("/", "").toString() +

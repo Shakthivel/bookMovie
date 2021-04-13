@@ -1,12 +1,12 @@
-import 'package:book_movie/controller/firebase.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:toast/toast.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import '../constants/BOXSTYLES.dart';
-import '../constants/COLORS.dart';
+
 import '../constants/TEXTSTYLES.dart';
 import '../widgets/singInUpDecoration.dart';
 
@@ -17,6 +17,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final fb = FirebaseDatabase.instance;
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -106,8 +107,8 @@ class _LoginState extends State<Login> {
                         try {
                           user = (await FirebaseAuth.instance
                                   .signInWithEmailAndPassword(
-                            email: "abc@gmail.com",
-                            password: "asdfghjkl",
+                            email: _emailController.text,
+                            password: _passwordController.text,
                           ))
                               .user;
                         } on FirebaseAuthException catch (e) {
@@ -123,6 +124,8 @@ class _LoginState extends State<Login> {
                           }
                         }
                         if (user != null) {
+                          final SharedPreferences prefs = await _prefs;
+                          await prefs.setString("uid", user.uid.toString());
                           await ref
                               .child("users")
                               .child(user.uid.toString())

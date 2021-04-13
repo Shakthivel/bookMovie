@@ -10,7 +10,7 @@ class TicketScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.fromLTRB(10, 100, 10, 10),
           child: Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
