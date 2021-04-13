@@ -113,10 +113,12 @@ class _LoginState extends State<Login> {
                               .user;
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'user-not-found') {
+                            _progressOverlay.remove();
                             Toast.show("No user found for that email.", context,
                                 duration: Toast.LENGTH_SHORT,
                                 gravity: Toast.BOTTOM);
                           } else if (e.code == 'wrong-password') {
+                            _progressOverlay.remove();
                             Toast.show('Wrong password provided for that user.',
                                 context,
                                 duration: Toast.LENGTH_SHORT,

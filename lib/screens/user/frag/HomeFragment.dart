@@ -117,6 +117,7 @@ class _HomeFragmentState extends State<HomeFragment> {
           ListView.builder(
             itemCount: moviesList.length,
             shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext ctx, int index) {
               Movie m = moviesList[index];
               return Padding(

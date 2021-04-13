@@ -269,6 +269,8 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
                             setState(() {
                               movieImage = null;
                             });
+                            Navigator.of(context)
+                                .pushReplacementNamed('/admin');
                           }
                         } else {
                           Toast.show("Please select an image", context,

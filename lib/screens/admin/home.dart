@@ -22,7 +22,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/addMovie');
+          Navigator.of(context).pushReplacementNamed('/addMovie');
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
