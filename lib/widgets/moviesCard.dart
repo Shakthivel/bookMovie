@@ -1,4 +1,5 @@
 import 'package:book_movie/models/Movie.dart';
+import 'package:book_movie/screens/admin/editMovie.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -42,7 +43,7 @@ class _MoviesCardState extends State<MoviesCard> {
                       : Center(
                           child: Image.network(
                             movieUrl,
-                            height: 125,
+                            height: 150,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -92,7 +93,15 @@ class _MoviesCardState extends State<MoviesCard> {
                             ),
                           ),
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  EditMovieScreen(movie: widget.movie),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

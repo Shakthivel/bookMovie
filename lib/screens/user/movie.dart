@@ -17,7 +17,8 @@ class _MovieScreenState extends State<MovieScreen> {
   String movieUrl;
   DateTime selectedDate = DateTime.now();
   var pickedDate;
-  String displayDate;
+  String displayDate =
+      DateTime.now().toString().substring(0, 11).split("-").reversed.join('/');
 
   @override
   void initState() {
@@ -187,18 +188,19 @@ class _MovieScreenState extends State<MovieScreen> {
                   ),
                 ),
                 InkWell(
-                  child:
-                      Text(displayDate == null ? 'Select a Date' : displayDate),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(displayDate),
+                  ),
                   onTap: () async {
                     DateTime picked = await showDatePicker(
                       context: context,
-                      initialDate: selectedDate, // Refer step 1
+                      initialDate: selectedDate,
                       firstDate: selectedDate,
                       lastDate: selectedDate.add(Duration(days: 7)),
                     );
 
                     if (picked != null) {
-                      //print(picked);
                       setState(() {
                         pickedDate = picked
                             .toString()

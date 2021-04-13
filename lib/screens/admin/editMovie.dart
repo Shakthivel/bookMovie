@@ -5,34 +5,56 @@ import 'package:book_movie/constants/TEXTSTYLES.dart';
 import 'package:book_movie/controller/firebase.dart';
 import 'package:book_movie/models/Movie.dart';
 import 'package:book_movie/screens/admin/pickfile.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:image_picker/image_picker.dart';
-
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:toast/toast.dart';
 
-class AddMovieScreen extends StatefulWidget {
+class EditMovieScreen extends StatefulWidget {
+  Movie movie;
+
+  EditMovieScreen({this.movie});
+
   @override
-  _AddMovieScreenState createState() => _AddMovieScreenState();
+  _EditMovieScreenState createState() => _EditMovieScreenState();
 }
 
-class _AddMovieScreenState extends State<AddMovieScreen> {
+class _EditMovieScreenState extends State<EditMovieScreen> {
   var _formKey = GlobalKey<FormState>();
+
   String title;
+  TextEditingController _titleController = TextEditingController();
   String plot;
+  TextEditingController _plotController = TextEditingController();
   String cast;
+  TextEditingController _castController = TextEditingController();
   String genre;
+  TextEditingController _genreController = TextEditingController();
   String releaseDate;
+  TextEditingController _releaseDateController = TextEditingController();
   String language;
+  TextEditingController _languageController = TextEditingController();
   String price;
+  TextEditingController _priceController = TextEditingController();
   String theatreTimings;
+  TextEditingController _theatreController = TextEditingController();
+
+  final picker = ImagePicker();
+
+  File movieImage;
 
   @override
   void initState() {
     super.initState();
+    _titleController.text = widget.movie.name;
+    _plotController.text = widget.movie.plot;
+    _castController.text = widget.movie.cast.join(",");
+    _genreController.text = widget.movie.genres.join(",");
+    _releaseDateController.text = widget.movie.releaseDate;
+    _languageController.text = widget.movie.language.join(",");
+    _theatreController.text = widget.movie.theatre.join(",");
+    _priceController.text = widget.movie.price;
   }
 
-  File movieImage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +67,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Text(
-                  "Add A Movie",
+                  "Edit the Movie",
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w600,
@@ -81,6 +103,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
                     return null;
                   },
                   decoration: inputFieldDec,
+                  controller: _titleController,
                   onSaved: (value) {
                     title = value;
                   },
@@ -102,6 +125,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
                     }
                     return null;
                   },
+                  controller: _plotController,
                   decoration: inputFieldDec,
                   maxLines: 15,
                   minLines: 4,
@@ -126,6 +150,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
                     }
                     return null;
                   },
+                  controller: _castController,
                   decoration: inputFieldDec,
                   onSaved: (value) {
                     cast = value;
@@ -148,6 +173,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
                     }
                     return null;
                   },
+                  controller: _genreController,
                   decoration: inputFieldDec,
                   onSaved: (value) {
                     genre = value;
@@ -170,6 +196,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
                     }
                     return null;
                   },
+                  controller: _releaseDateController,
                   decoration: inputFieldDec,
                   onSaved: (value) {
                     releaseDate = value;
@@ -192,6 +219,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
                     }
                     return null;
                   },
+                  controller: _languageController,
                   decoration: inputFieldDec,
                   onSaved: (value) {
                     language = value;
@@ -214,6 +242,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
                     }
                     return null;
                   },
+                  controller: _priceController,
                   decoration: inputFieldDec,
                   onSaved: (value) {
                     price = value;
@@ -236,6 +265,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
                     }
                     return null;
                   },
+                  controller: _theatreController,
                   decoration: inputFieldDec,
                   onSaved: (value) {
                     theatreTimings = value;
@@ -248,7 +278,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
-                      child: shadowButton(bText: "Add"),
+                      child: shadowButton(bText: "Update"),
                       onTap: () {
                         if (movieImage != null) {
                           if (_formKey.currentState.validate()) {
